@@ -1,0 +1,31 @@
+
+<div class="w-8">
+    <p-table [value]="usuarios" [tableStyle]="{ 'min-width': '50vw' }">
+        <ng-template pTemplate="header">
+            <tr>
+    
+                <th>id</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pacientes>
+            <tr>
+    
+                <td>{{ pacientes.id }}</td>
+                <td>{{ pacientes.user }}</td>
+                <td>{{ pacientes.pass }}</td>
+
+                <td><p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-info p-button-text p-button-raised" (onClick)="showDialog(pacientes.id)"></p-button>
+                </td>
+                <td><p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text p-button-raised" (onClick)="eliminarUsuario(pacientes.id)"></p-button>
+                </td>
+                
+    
+            </tr>
+        </ng-template>
+    </p-table>
+    </div>

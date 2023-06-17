@@ -1,0 +1,139 @@
+
+<div class="card m-2">
+    <div class="flex flex-wrap md:justify-content-between justify-content-center card-container">
+        <div class="bg-teal-500 text-5xl text-bluegray-900 font-semibold border-round m-2 flex align-items-center justify-content-center" style="min-width: 99%; min-height: 100px">Gestion de Medicos</div>
+    </div>
+</div>
+<div class="formgrid grid m-2">
+<div class="w-20rem">
+    <form action="">
+    
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Nombre" [(ngModel)]="medico.nombre" name="nombre"/>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Apellido" [(ngModel)]="medico.apellido" name="apellido"/>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="DNI"  [(ngModel)]="medico.dni" name="dni"/>
+        </div>
+        
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Telefono"  [(ngModel)]="medico.telefono" name="telefono"/>
+            
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <select name="especialidad" class="w-7" [(ngModel)]="medico.especialidad">
+                <option >--select--</option>
+                <option *ngFor="let items of listEsp">
+                    {{items.nombre}}
+                </option>
+            </select>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Correo"  [(ngModel)]="medico.correo" name="correo"/>
+        </div>
+
+        <p-button label="Registrar" styleClass="p-button-outlined m-2" (onClick)="crearMedico()"></p-button>
+    </form>
+</div>
+
+
+<div class="w-8">
+    <p-table [value]="medicos" [tableStyle]="{ 'min-width': '50vw' }">
+        <ng-template pTemplate="header">
+            <tr>
+    
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Telefono</th>
+                <th>Especialidad</th>
+                
+                <th>Correo</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-items>
+            <tr>
+    
+                <td>{{ items.nombre }}</td>
+                <td>{{ items.apellido }}</td>
+                <td>{{ items.dni }}</td>
+                <td>{{ items.telefono}}</td>
+                <td>{{ items.especialidad}}</td>
+                <td>{{ items.correo}}</td>
+                <td><p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-info p-button-text p-button-raised" (onClick)="showDialog(items.id)"></p-button>
+                </td>
+                <td><p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text p-button-raised" (onClick)="eliminarMedico(items.id)"></p-button>
+                </td>
+                
+    
+            </tr>
+        </ng-template>
+    </p-table>
+    </div>
+</div> 
+
+
+<p-dialog [(visible)]="display" [style]="{width: '25vw'}">
+    <h3>Actulizar datos</h3>
+    <form action="">
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Nombre" [(ngModel)]="medico.nombre" name="nombre"/>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Apellido" [(ngModel)]="medico.apellido" name="apellido"/>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="DNI" [(ngModel)]="medico.dni" name="DNI"/>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input pInputText placeholder="Telefono" [(ngModel)]="medico.telefono" name="Telefono"/>
+        </div>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <select name="especialidad" class="w-7" [(ngModel)]="medico.especialidad">
+                <option >--select--</option>
+                <option *ngFor="let items of listEsp">
+                    {{items.nombre}}
+                </option>
+            </select>
+        </div>
+        <p-button label="Atualizar" styleClass="p-button-outlined p-button-success m-2" (onClick)="actualizarMedico(medico.id)"></p-button>
+
+    </form>   
+</p-dialog>

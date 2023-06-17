@@ -1,0 +1,98 @@
+<div class="p-inputgroup m-2">
+    <span class="p-inputgroup-addon">
+        <i class="pi pi-search" style="font-size: 1rem"></i>
+    </span>
+    <input pInputText placeholder="Buscar"/>
+</div>
+<div class="m-2">
+    
+<p-button label="Agregar" styleClass="p-button-outlined p-button-secondary m-2" (onClick)="showDialogAgregar()"></p-button>
+<p-button label="Notificar" styleClass="p-button-outlined p-button-secondary m-2"></p-button>
+<p-button label="Cancelar" styleClass="p-button-outlined p-button-secondary m-2"></p-button>
+</div>
+<div class="w-8">
+    <p-table [value]="citas" [tableStyle]="{ 'min-width': '50vw' }">
+        <ng-template pTemplate="header">
+            <tr>
+    
+                <th>id</th>
+                <th>DNI</th>
+                <th>Fecha</th>
+                <th>Especialidad</th>
+                <th>Medico</th>
+                <th>Estado</th>
+                
+    
+                <th>Editar</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-items>
+            <tr>
+    
+                <td>{{ items.id }}</td>
+                <td>{{ items.dni }}</td>
+                <td>{{ items.fecha }}</td>
+                <td>{{ items.especialidad }}</td>
+                <td>{{ items.medico }}</td>
+                <td>{{ items.estado }}</td>
+
+                <td><p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-info p-button-text p-button-raised" (onClick)="showDialogEditar(items.id)"></p-button>
+                </td>
+                
+    
+            </tr>
+        </ng-template>
+    </p-table>
+    </div>
+
+<p-dialog [(visible)]="display" [style]="{width: '90vw',height:'90hw'}">
+    <h3>REGISTAR CITA</h3>
+    <form action="">
+        <label for="">Fecha</label>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+                <input type="date" name="fecha" [(ngModel)]="cita.fecha">
+                <!-- <p-calendar [(ngModel)]="date" dateFormat="dd.mm.yy"></p-calendar> -->
+            </span>
+        </div>
+        <label for="">DNI Paciente</label>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <select name="dni" class="w-7" [(ngModel)]="cita.dni">
+                <option >--select--</option>
+                <option *ngFor="let items of listPaciente">
+                    {{items.dni}}
+                </option>
+            </select>
+        </div>
+        <label for="">Medico</label>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <select name="medico" class="w-7" [(ngModel)]="cita.medico">
+                <option >--select--</option>
+                <option *ngFor="let items of listMedico">
+                    {{items.nombre}}
+                </option>
+            </select>
+        </div>
+        <label for="">Especialidad</label>
+        <div class="p-inputgroup m-2">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <select name="especialidad" class="w-7" [(ngModel)]="cita.especialidad">
+                <option >--select--</option>
+                <option *ngFor="let items of listEsp">
+                    {{items.nombre}}
+                </option>
+            </select>
+        </div>
+        <p-button label="Crear Cita" styleClass="p-button-outlined p-button-success m-2" (onClick)="crearCita()"></p-button>
+
+    </form>   
+</p-dialog>
